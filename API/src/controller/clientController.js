@@ -28,14 +28,8 @@ router.get('/', async(req, res) => {
 router.post("/",async function(req,res){
   var newData = {
     "name": req.body.name,
-    "cpf": req.body.cpf,
-    "street": req.body.street,
-    "houseNumber": req.body.houseNumber,
-    "neighborhood": req.body.neighborhood,
-    "city": req.body.city,
-    "cep": req.body.cep,
-    "state": req.body.state,
-    "discount": req.body.discount
+    "password": req.body.password,
+    "isAdmin": req.body.isAdmin
   }
 
   var client = mongoose.model('Client');

@@ -6,6 +6,9 @@ const ClientSchema = mongoose.Schema({
     },
     password:{
         type: String,
+    },
+    isAdmin:{
+        type: Boolean,
     }
 });
 

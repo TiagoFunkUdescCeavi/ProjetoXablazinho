@@ -32,11 +32,16 @@ router.post('/update', async(req, res) => {
 });
 
 router.put('/register', async (req, res) => {    
-    const { name, password, isAdmin, expirationDate } = req.body;
-    const results = database.query('INSERT INTO USER (NAME, PASSWORD, ISADMIN, EXPIRATIONDATE) VALUES ($1,$2,$3,$4) RETURNING ID', [name, password, isAdmin, expirationDate]);
-    if (results.rows[0]) 
-        res.status(201).json(results.rows[0]);
-    else res.status(200).json({error: "Não foi possível inserir um usuário novo no sistema."});
+    const { name, password, isAdmin, expirationDate, databaseName } = req.body;
+    const databaseQuery = database.query('SELECT ID FROM TABLEDBS WHERE NAME = $1', [databaseName]);
+    if (!databaseQuery.rows[0]){
+        res.status(200).json({error: "Banco de dados não encontrado!"});
+    }else{
+        const results = database.query('INSERT INTO USER (NAME, PASSWORD, ISADMIN, EXPIRATIONDATE, DBID) VALUES ($1,$2,$3,$4,$5) RETURNING ID', [name, password, isAdmin, expirationDate, databaseQuery.rows[0].id]);
+        if (results.rows[0]) 
+            res.status(201).json(results.rows[0]);
+        else res.status(200).json({error: "Não foi possível inserir um usuário novo no sistema."});
+    }
 });
 
 module.exports = app => app.use('/users', router);

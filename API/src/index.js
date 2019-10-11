@@ -17,9 +17,8 @@ app.all('/*', function(req, res, next) {
   }
 });
 
-//require('./controller/productController')(app);
-//require('./controller/orderController')(app);
-require('./controller/clientController')(app);
+require('./controller/userController')(app);
+require('./controller/dbController')(app);
 
 app.listen(3000);
 

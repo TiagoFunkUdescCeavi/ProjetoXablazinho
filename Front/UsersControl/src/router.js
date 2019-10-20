@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import ClientPage from './views/ClientPage.vue'
-import CartPage from './components/CartPage.vue'
+import Databases from './views/Databases.vue'
+import Users from './views/Users.vue'
 
 Vue.use(Router)
 
@@ -13,17 +12,16 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Databases
     },
     {
-      path: '/client',
-      name: 'clientPage',
-      component: ClientPage
+      path: '/database/users',
+      name: 'dbUsers',
+      component: Users
     },
     {
-      path: '/cart',
-      name: 'cartPage',
-      component: CartPage
+      path: '/*',
+      redirect: 'home'
     }
   ]
-})
+});
